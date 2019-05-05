@@ -1,0 +1,20 @@
+<agm-map [latitude]="latitude" [longitude]="longitude" [rotateControl]="true" [panControl]=true
+  [fullscreenControl]="true" [mapTypeId]="maptype" [zoom]="5">
+</agm-map>
+<agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng" [opacity]="marker.alpha"
+  [markerDraggable]="true" (markerClick)="selectMarker($event)">
+</agm-marker>
+<form class="form-inline" #form="ngForm" (ngSubmit)="setCenter()">
+  <div class="form-group">
+    <input type="text" class="form-control" name="latitude" [(ngModel)]="lat" placeholder="Enter latitude" required>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="longitude" [(ngModel)]="long" placeholder="Enter longitude" required>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Go</button>
+</form>
+<div class="col-md-3 col-sm-12 col-xs-12">
+  <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
+  <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
+  <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
+</div>
